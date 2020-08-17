@@ -32,7 +32,11 @@ public class Enemy : MonoBehaviour
 			{
                 player.Damage();
                 Destroy(this.gameObject);
-            }           
+            }
+            else if(player == null)
+			{
+                Debug.LogError("player is null");
+			}
 		}
         else if (other.tag == "Laser")
 		{
