@@ -21,6 +21,11 @@ public class Player : MonoBehaviour
     private bool _shieldsEnabled = false;
     [SerializeField]
     private GameObject _shieldsVisualizer;
+    [SerializeField]
+    private int _score;
+    [SerializeField]
+    private GameObject _uiManager;
+
 
     void Start()
     {
@@ -40,6 +45,7 @@ public class Player : MonoBehaviour
         {
             FireLaser();
         }
+
     }
 
     void CalculateMovement()
@@ -85,9 +91,11 @@ public class Player : MonoBehaviour
             return;
 		}
         _lives--;
+        _uiManager.GetComponent<UIManager>().UpdateLives(_lives);
 
 		if (_lives < 1)
 		{
+            _uiManager.GetComponent<UIManager>()._isGameOver = true;
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
 		}
@@ -109,6 +117,12 @@ public class Player : MonoBehaviour
 	{
         _shieldsEnabled = true;
         _shieldsVisualizer.SetActive(true);
+	}
+
+    public void UpdateScore(int points)
+	{
+        _score += points;
+        _uiManager.GetComponent<UIManager>().UpdateScoreDisplay(_score);
 	}
 
     IEnumerator TripleShotPowerDown()
