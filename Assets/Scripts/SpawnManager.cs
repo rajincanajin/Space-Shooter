@@ -15,6 +15,11 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
+      
+    }
+
+    public void StartSpawning()
+	{
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerupRoutine());
     }
@@ -23,6 +28,7 @@ public class SpawnManager : MonoBehaviour
 	{        
 		while (!_stopSpawning)
 		{
+            yield return new WaitForSeconds(3.0f);
             Vector3 posToSpawn = new Vector3(Random.Range(-9f, 9f), 10, 0);
             GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
@@ -33,6 +39,7 @@ public class SpawnManager : MonoBehaviour
 	{
 		while (!_stopSpawning)
 		{
+            yield return new WaitForSeconds(3.0f);
             int randomPowerup = Random.Range(0, 3);
             Vector3 posToSpawn = new Vector3(Random.Range(-9f, 9f), 10, 0);
             Instantiate(powerups[randomPowerup], posToSpawn, Quaternion.identity);
