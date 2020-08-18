@@ -30,8 +30,8 @@ public class Powerup : MonoBehaviour
 				case 1:
 					other.GetComponent<Player>().EnableSpeedBoost();
 					break;
-				case 3:
-					Debug.Log("Shields Enabled");
+				case 2:
+					other.GetComponent<Player>().EnableShields();
 					break;
 				default:
 					Debug.LogWarning("Invalid Powerup ID. No powerup implemented");
