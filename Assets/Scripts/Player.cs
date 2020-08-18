@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {   
     [SerializeField]
     private float _speed = 3.5f;
+    private float _speedModifier = 1.0f;
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
@@ -17,7 +18,6 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject _tripleShotPrefab;
-    [SerializeField]
     private bool _tripleShotEnabled = false;
 
     void Start()
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         float _horizontalInput = Input.GetAxis("Horizontal");
         float _verticalInput = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(_horizontalInput, _verticalInput, 0);
-        transform.Translate(direction * _speed * Time.deltaTime);
+        transform.Translate(direction * _speed * _speedModifier * Time.deltaTime);
 
         //define and enforce position boundries (y)
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.85f, 0), 0);
@@ -91,9 +91,21 @@ public class Player : MonoBehaviour
         StartCoroutine(TripleShotPowerDown());
 	}
 
+    public void EnableSpeedBoost()
+	{
+        _speedModifier = 2;
+        StartCoroutine(SpeedBoostPowerDown());
+	}
+
     IEnumerator TripleShotPowerDown()
 	{
         yield return new WaitForSeconds(5.0f);
         _tripleShotEnabled = false;
+	}
+
+    IEnumerator SpeedBoostPowerDown()
+	{
+        yield return new WaitForSeconds(10.0f);
+        _speedModifier = 1f;
 	}
 }
