@@ -8,8 +8,18 @@ public class Powerup : MonoBehaviour
 	private float _speed = 3.0f;
 	[SerializeField]
 	private int _powerupID; //0 = triple shot, 1 = speed, 2 = shields
+	private AudioSource _audioSource;
 
-    void Update()
+	private void Start()
+	{
+		_audioSource = GetComponent<AudioSource>();
+		if (_audioSource == null)
+		{
+			Debug.LogError("_audioSource (Powerup) is NULL");
+		}
+	}
+
+	void Update()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 		if (transform.position.y < -6.0f)
@@ -22,6 +32,7 @@ public class Powerup : MonoBehaviour
 	{
 		if (other.tag == "Player")
 		{
+			_audioSource.Play();
 			switch (_powerupID)
 			{
 				case 0:
@@ -37,7 +48,8 @@ public class Powerup : MonoBehaviour
 					Debug.LogWarning("Invalid Powerup ID. No powerup implemented");
 					break;
 			}
-			Destroy(this.gameObject);
+			gameObject.GetComponent<SpriteRenderer>().enabled = false;
+			Destroy(this.gameObject, 1);
 		}
 	}
 }

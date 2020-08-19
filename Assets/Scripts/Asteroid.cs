@@ -11,6 +11,7 @@ public class Asteroid : MonoBehaviour
     [SerializeField]
     private SpawnManager _spawnManager;
 
+
     void Start()
     {
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();

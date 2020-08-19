@@ -27,6 +27,14 @@ public class Player : MonoBehaviour
     private GameObject _uiManager;
     [SerializeField]
     private GameObject _leftEngine, _rightEngine;
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip _laserClip;
+    [SerializeField]
+    private AudioClip _explosionClip;
+    private SpriteRenderer _renderer;
+    [SerializeField]
+    private GameObject _thrusters;
 
 
     void Start()
@@ -37,6 +45,14 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("_spawnManager is NULL");
         }
+
+        _audioSource = GetComponent<AudioSource>();
+		if (_audioSource == null)
+		{
+            Debug.LogError("_audioSource (Player) is NULL");
+		}
+
+        _renderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -82,6 +98,9 @@ public class Player : MonoBehaviour
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.25f, 0), Quaternion.identity);
         }
+
+        _audioSource.clip = _laserClip;
+        _audioSource.Play();
     }
 
     public void Damage()
@@ -108,9 +127,15 @@ public class Player : MonoBehaviour
 
 		if (_lives < 1)
 		{
+            _renderer.enabled = false;
+            _leftEngine.SetActive(false);
+            _rightEngine.SetActive(false);
+            _thrusters.SetActive(false);
+            _audioSource.clip = _explosionClip;
+            _audioSource.Play();
             _uiManager.GetComponent<UIManager>()._isGameOver = true;
             _spawnManager.OnPlayerDeath();
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 2f);
 		}
 	}
 
