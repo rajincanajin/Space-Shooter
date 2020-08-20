@@ -33,12 +33,15 @@ public class Player : MonoBehaviour
     private AudioClip _laserClip;
     [SerializeField]
     private AudioClip _explosionClip;
+    [SerializeField]
+    private AudioClip _outOfAmmoClip;
     private SpriteRenderer _renderer;
     [SerializeField]
     private GameObject _thrusters;
     private bool _speedBoostActive = false;
     private int _shieldStrength;
-
+    [SerializeField]
+    private int _remainingAmmo = 15;
 
     void Start()
     {
@@ -64,7 +67,15 @@ public class Player : MonoBehaviour
        
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
-            FireLaser();
+            if(_remainingAmmo > 0)
+			{
+                FireLaser();
+            }
+			else
+			{
+                _audioSource.clip = _outOfAmmoClip;
+                _audioSource.Play();
+			}
         }
 
     }
@@ -103,6 +114,8 @@ public class Player : MonoBehaviour
 
     void FireLaser()
 	{
+        _remainingAmmo--;
+        _uiManager.GetComponent<UIManager>().ShowAmmo(_remainingAmmo);
         _canFire = Time.time + _fireRate;
 
         if (_tripleShotEnabled)

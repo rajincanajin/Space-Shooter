@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     private Text _restartText;
     [SerializeField]
     private Text _shieldsText;
+    [SerializeField]
+    private Text _ammoText;
     public bool _isGameOver = false;
     [SerializeField]
     private GameObject _gameController;
@@ -82,6 +84,11 @@ public class UIManager : MonoBehaviour
 	{
         _shieldsText.text = "Shield Strength: 100%";
     }
+
+    public void ShowAmmo(int _remainingAmmo)
+	{
+        _ammoText.text = "Ammo: " + _remainingAmmo;
+	}
 
     IEnumerator GameOverTextFlicker()
 	{
