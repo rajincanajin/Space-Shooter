@@ -642,6 +642,7 @@ MonoBehaviour:
   - {fileID: 6855746999569885837, guid: 74171849aa29cf74cb779eb0784a890b, type: 3}
   - {fileID: 9088379582801514172, guid: aa67b9f914cd16143b44c56aca7681e4, type: 3}
   - {fileID: 6746693870507617651, guid: d2f3e2411e0cc3e42a7c2d2892d4a9b8, type: 3}
+  - {fileID: 8405218360117537515, guid: f974caef491d0c44f848ec2200efd111, type: 3}
 --- !u!4 &989161143
 Transform:
   m_ObjectHideFlags: 0
@@ -929,6 +930,7 @@ MonoBehaviour:
   _outOfAmmoClip: {fileID: 8300000, guid: d667def7624197e48aae5e51e4b2e2bf, type: 3}
   _thrusters: {fileID: 1693711753}
   _remainingAmmo: 15
+  _reloadClip: {fileID: 8300000, guid: 5bcc0ff4dbef3d3419f4008e1578f3a3, type: 3}
 --- !u!212 &1097091580
 SpriteRenderer:
   m_ObjectHideFlags: 0

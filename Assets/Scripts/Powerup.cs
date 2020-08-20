@@ -44,6 +44,9 @@ public class Powerup : MonoBehaviour
 				case 2:
 					other.GetComponent<Player>().EnableShields();
 					break;
+				case 3:
+					other.GetComponent<Player>().ReloadAmmo();
+					break;
 				default:
 					Debug.LogWarning("Invalid Powerup ID. No powerup implemented");
 					break;

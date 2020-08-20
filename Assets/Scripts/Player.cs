@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
     private int _shieldStrength;
     [SerializeField]
     private int _remainingAmmo = 15;
+    [SerializeField]
+    private AudioClip _reloadClip;
 
     void Start()
     {
@@ -204,6 +206,14 @@ public class Player : MonoBehaviour
     private void ResetSpeed()
 	{
         _speedModifier = 1;
+	}
+
+    public void ReloadAmmo()
+	{
+        _remainingAmmo = 15;
+        _uiManager.GetComponent<UIManager>().ShowAmmo(_remainingAmmo);
+        _audioSource.clip = _reloadClip;
+        _audioSource.Play();
 	}
 
     IEnumerator TripleShotPowerDown()
