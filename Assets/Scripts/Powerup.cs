@@ -7,7 +7,7 @@ public class Powerup : MonoBehaviour
 	[SerializeField]
 	private float _speed = 3.0f;
 	[SerializeField]
-	private int _powerupID; //0 = triple shot, 1 = speed, 2 = shields
+	private int _powerupID; //0 = triple shot, 1 = speed, 2 = shields, 3 = ammo, 4 = repair
 	private AudioSource _audioSource;
 
 	private void Start()
@@ -46,6 +46,9 @@ public class Powerup : MonoBehaviour
 					break;
 				case 3:
 					other.GetComponent<Player>().ReloadAmmo();
+					break;
+				case 4:
+					other.GetComponent<Player>().RepairDamage();
 					break;
 				default:
 					Debug.LogWarning("Invalid Powerup ID. No powerup implemented");

@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
     private AudioClip _explosionClip;
     [SerializeField]
     private AudioClip _outOfAmmoClip;
+    [SerializeField]
+    private AudioClip _repairClip;
     private SpriteRenderer _renderer;
     [SerializeField]
     private GameObject _thrusters;
@@ -213,6 +215,29 @@ public class Player : MonoBehaviour
         _remainingAmmo = 15;
         _uiManager.GetComponent<UIManager>().ShowAmmo(_remainingAmmo);
         _audioSource.clip = _reloadClip;
+        _audioSource.Play();
+	}
+
+    public void RepairDamage()
+	{
+		if (_lives < 3)
+		{
+            _lives++;
+            _uiManager.GetComponent<UIManager>().UpdateLives(_lives);
+			switch (_lives)
+			{
+                case 2:
+                    _rightEngine.SetActive(false);
+                    break;
+                case 3:
+                    _leftEngine.SetActive(false);
+                    break;
+                default:
+                    break;
+			}
+        }
+
+        _audioSource.clip = _repairClip;
         _audioSource.Play();
 	}
 

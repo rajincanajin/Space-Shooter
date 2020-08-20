@@ -643,6 +643,7 @@ MonoBehaviour:
   - {fileID: 9088379582801514172, guid: aa67b9f914cd16143b44c56aca7681e4, type: 3}
   - {fileID: 6746693870507617651, guid: d2f3e2411e0cc3e42a7c2d2892d4a9b8, type: 3}
   - {fileID: 8405218360117537515, guid: f974caef491d0c44f848ec2200efd111, type: 3}
+  - {fileID: 4875752404035088837, guid: 5b988d0ec85ca4b46893b04679ac7e9a, type: 3}
 --- !u!4 &989161143
 Transform:
   m_ObjectHideFlags: 0
@@ -928,6 +929,7 @@ MonoBehaviour:
   _laserClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _explosionClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   _outOfAmmoClip: {fileID: 8300000, guid: d667def7624197e48aae5e51e4b2e2bf, type: 3}
+  _repairClip: {fileID: 8300000, guid: a80328ced8463584891c07a892a63bbc, type: 3}
   _thrusters: {fileID: 1693711753}
   _remainingAmmo: 15
   _reloadClip: {fileID: 8300000, guid: 5bcc0ff4dbef3d3419f4008e1578f3a3, type: 3}
