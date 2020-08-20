@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {   
     [SerializeField]
     private float _speed = 3.5f;
+    [SerializeField]
     private float _speedModifier = 1.0f;
     [SerializeField]
     private GameObject _laserPrefab;
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer _renderer;
     [SerializeField]
     private GameObject _thrusters;
+    private bool _speedBoostActive = false;
 
 
     void Start()
@@ -68,6 +70,18 @@ public class Player : MonoBehaviour
 
     void CalculateMovement()
 	{
+		if (!_speedBoostActive)
+		{
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                _speedModifier = 2f;
+            }
+            else
+            {
+                _speedModifier = 1;
+            }
+        }
+       
         float _horizontalInput = Input.GetAxis("Horizontal");
         float _verticalInput = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(_horizontalInput, _verticalInput, 0);
@@ -145,10 +159,11 @@ public class Player : MonoBehaviour
         StartCoroutine(TripleShotPowerDown());
 	}
 
-    public void EnableSpeedBoost()
-	{
-        _speedModifier = 2;
-        StartCoroutine(SpeedBoostPowerDown());
+    public void EnableSpeedBoost() 
+	{		
+        _speedModifier = 3f;
+        _speedBoostActive = true;    
+        StartCoroutine(SpeedBoostPowerDown());     
 	}
 
     public void EnableShields()
@@ -163,6 +178,11 @@ public class Player : MonoBehaviour
         _uiManager.GetComponent<UIManager>().UpdateScoreDisplay(_score);
 	}
 
+    private void ResetSpeed()
+	{
+        _speedModifier = 1;
+	}
+
     IEnumerator TripleShotPowerDown()
 	{
         yield return new WaitForSeconds(5.0f);
@@ -172,6 +192,7 @@ public class Player : MonoBehaviour
     IEnumerator SpeedBoostPowerDown()
 	{
         yield return new WaitForSeconds(10.0f);
+        _speedBoostActive = false;
         _speedModifier = 1f;
 	}
 }
