@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     private Text _gameOverText;
     [SerializeField]
     private Text _restartText;
+    [SerializeField]
+    private Text _shieldsText;
     public bool _isGameOver = false;
     [SerializeField]
     private GameObject _gameController;
@@ -52,6 +54,33 @@ public class UIManager : MonoBehaviour
         _gameOverText.gameObject.SetActive(true);
         _restartText.gameObject.SetActive(true);
         StartCoroutine(GameOverTextFlicker());
+    }
+
+    public void UpdateShieldText(int shieldStrength)
+	{
+        int strengthPercentage;
+        
+		switch (shieldStrength)
+		{
+            case 3:
+                strengthPercentage = 100; //should never be true, but including the option in case of unforseen circumstances to prevent bugs
+                break;
+            case 2:
+                strengthPercentage = 66;
+                break;
+            case 1:
+                strengthPercentage = 33;
+                break;
+            default:
+                strengthPercentage = 0;
+                break;
+		}
+        _shieldsText.text = "Shield Strength: " + strengthPercentage + "%";
+	}
+
+    public void EnableShieldText()
+	{
+        _shieldsText.text = "Shield Strength: 100%";
     }
 
     IEnumerator GameOverTextFlicker()

@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _thrusters;
     private bool _speedBoostActive = false;
+    private int _shieldStrength;
 
 
     void Start()
@@ -121,9 +122,16 @@ public class Player : MonoBehaviour
 	{
 		if (_shieldsEnabled)
 		{
-            _shieldsEnabled = false;
-            _shieldsVisualizer.SetActive(false);
+            _shieldStrength--;
+            _uiManager.GetComponent<UIManager>().UpdateShieldText(_shieldStrength);
+			if (_shieldStrength < 1)
+			{
+                _shieldsEnabled = false;
+                _shieldsVisualizer.SetActive(false);
+                return;
+            }
             return;
+           
 		}
         _lives--;
         _uiManager.GetComponent<UIManager>().UpdateLives(_lives);
@@ -168,6 +176,8 @@ public class Player : MonoBehaviour
 
     public void EnableShields()
 	{
+        _uiManager.GetComponent<UIManager>().EnableShieldText();
+        _shieldStrength = 3;
         _shieldsEnabled = true;
         _shieldsVisualizer.SetActive(true);
 	}
