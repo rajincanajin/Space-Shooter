@@ -48,6 +48,11 @@ public class Player : MonoBehaviour
     private AudioClip _reloadClip;
     [SerializeField]
     private Camera _mainCamera;
+    [SerializeField]
+    private float _boostCooldown = 1;
+    [SerializeField]
+    private bool _boostActive;
+    
 
     void Start()
     {
@@ -65,6 +70,8 @@ public class Player : MonoBehaviour
 		}
 
         _renderer = GetComponent<SpriteRenderer>();
+        //_boostActive = true;
+        _boostCooldown = 1;
     }
 
     void Update()
@@ -89,10 +96,18 @@ public class Player : MonoBehaviour
 	{
 		if (!_speedBoostActive)
 		{
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && _boostCooldown >=1)
             {
+                StopCoroutine(ChargeBoost());
                 _speedModifier = 2f;
+                _uiManager.GetComponent<UIManager>().UpdateBoostSlider(_boostCooldown);
+                _boostActive = true;
             }
+            else if (Input.GetKeyUp(KeyCode.LeftShift) && _boostActive)
+			{
+                _boostActive = false;
+                StartCoroutine(ChargeBoost());
+			}
             else
             {
                 _speedModifier = 1;
@@ -244,7 +259,7 @@ public class Player : MonoBehaviour
         _audioSource.Play();
 	}
 
-   IEnumerator CameraShake()
+    IEnumerator CameraShake()
 	{
         Debug.Log("Starting Camera Shake");
         int i = 0;
@@ -271,4 +286,20 @@ public class Player : MonoBehaviour
         _speedBoostActive = false;
         _speedModifier = 1f;
 	}
+
+    IEnumerator ChargeBoost()
+	{
+        _boostCooldown = 0;
+        while (_boostCooldown < 1 && !_boostActive)
+        {
+            _uiManager.GetComponent<UIManager>().UpdateBoostSlider(_boostCooldown);
+			if (_boostCooldown <1)
+			{
+                _boostCooldown += 0.001f;
+            }
+            
+            yield return new WaitForSeconds(0.005f);
+        }
+
+    }
 }

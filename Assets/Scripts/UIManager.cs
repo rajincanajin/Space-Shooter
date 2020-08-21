@@ -23,6 +23,10 @@ public class UIManager : MonoBehaviour
     public bool _isGameOver = false;
     [SerializeField]
     private GameObject _gameController;
+    [SerializeField]
+    private Slider _boostSlider;
+    [SerializeField]
+    private Text _boostChargeText;
     
 
     void Start()
@@ -99,5 +103,12 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             _gameOverText.gameObject.SetActive(true);
         }        
+	}
+
+    public void UpdateBoostSlider(float value)
+	{
+
+        _boostSlider.value = value;
+        _boostChargeText.text = Mathf.Round(_boostSlider.value * 100) + "%";     
 	}
 }
