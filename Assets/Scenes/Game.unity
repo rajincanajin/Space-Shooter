@@ -933,6 +933,7 @@ MonoBehaviour:
   _thrusters: {fileID: 1693711753}
   _remainingAmmo: 15
   _reloadClip: {fileID: 8300000, guid: 5bcc0ff4dbef3d3419f4008e1578f3a3, type: 3}
+  _mainCamera: {fileID: 963194227}
 --- !u!212 &1097091580
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1671,8 +1672,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1835404793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.019, y: 0.949, z: 0}
-  m_LocalScale: {x: 1.0740875, y: 1.0743736, z: 1}
+  m_LocalPosition: {x: 0.035, y: 1.128, z: 0}
+  m_LocalScale: {x: 1.0982491, y: 1.1338483, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3

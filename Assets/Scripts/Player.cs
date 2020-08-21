@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
     private int _remainingAmmo = 15;
     [SerializeField]
     private AudioClip _reloadClip;
+    [SerializeField]
+    private Camera _mainCamera;
 
     void Start()
     {
@@ -81,7 +83,6 @@ public class Player : MonoBehaviour
                 _audioSource.Play();
 			}
         }
-
     }
 
     void CalculateMovement()
@@ -151,6 +152,8 @@ public class Player : MonoBehaviour
            
 		}
         _lives--;
+        StartCoroutine(CameraShake());
+        
         _uiManager.GetComponent<UIManager>().UpdateLives(_lives);
 		switch (_lives)
 		{
@@ -241,6 +244,21 @@ public class Player : MonoBehaviour
         _audioSource.Play();
 	}
 
+   IEnumerator CameraShake()
+	{
+        Debug.Log("Starting Camera Shake");
+        int i = 0;
+        while(i < 20)
+		{
+            float randomX = Random.Range(-.20f, 0.30f);
+            float randomY = Random.Range(0.75f, 1.35f);
+            Vector3 randomV3 = new Vector3(randomX, randomY, -10);
+            _mainCamera.transform.position = randomV3;
+            i++;
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+        
     IEnumerator TripleShotPowerDown()
 	{
         yield return new WaitForSeconds(5.0f);
