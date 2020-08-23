@@ -873,6 +873,8 @@ MonoBehaviour:
   - {fileID: 6746693870507617651, guid: d2f3e2411e0cc3e42a7c2d2892d4a9b8, type: 3}
   - {fileID: 8405218360117537515, guid: f974caef491d0c44f848ec2200efd111, type: 3}
   - {fileID: 4875752404035088837, guid: 5b988d0ec85ca4b46893b04679ac7e9a, type: 3}
+  - {fileID: 1298636722703044843, guid: 25ed9d166c83dd9409c4d1894beae848, type: 3}
+  randomPowerup: 0
 --- !u!4 &989161143
 Transform:
   m_ObjectHideFlags: 0
@@ -1165,6 +1167,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 963194227}
   _boostCooldown: 0
   _boostActive: 0
+  _wShotActive: 0
 --- !u!212 &1097091580
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1380,7 +1383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312438965}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2073087, y: -0.26714805, z: -0.7095799}
+  m_LocalPosition: {x: -5.83, y: -0.26714805, z: -0.7095799}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1881383198}

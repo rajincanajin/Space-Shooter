@@ -52,6 +52,8 @@ public class Player : MonoBehaviour
     private float _boostCooldown = 1;
     [SerializeField]
     private bool _boostActive;
+    [SerializeField]
+    private bool _wShotActive;
     
 
     void Start()
@@ -145,6 +147,11 @@ public class Player : MonoBehaviour
         else
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.25f, 0), Quaternion.identity);
+			if (_wShotActive)
+			{
+                Instantiate(_laserPrefab, transform.position + new Vector3(0.8f, -.25f, 0), Quaternion.AngleAxis(20f, new Vector3(0,0,-20)));
+                Instantiate(_laserPrefab, transform.position + new Vector3(-.8f, -.25f, 0), Quaternion.AngleAxis(20f, new Vector3(0, 0, 20)));
+			}
         }
 
         _audioSource.clip = _laserClip;
@@ -217,6 +224,12 @@ public class Player : MonoBehaviour
         _shieldsVisualizer.SetActive(true);
 	}
 
+    public void EnableWShot()
+	{
+        _wShotActive = true;
+        StartCoroutine(WShotPowerDown());
+	}
+
     public void UpdateScore(int points)
 	{
         _score += points;
@@ -286,6 +299,12 @@ public class Player : MonoBehaviour
         _speedBoostActive = false;
         _speedModifier = 1f;
 	}
+
+    IEnumerator WShotPowerDown()
+	{
+        yield return new WaitForSeconds(5.0f);
+        _wShotActive = false; 
+    }
 
     IEnumerator ChargeBoost()
 	{
