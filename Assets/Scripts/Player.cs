@@ -98,10 +98,11 @@ public class Player : MonoBehaviour
 	{
 		if (!_speedBoostActive)
 		{
-            if (Input.GetKey(KeyCode.LeftShift) && _boostCooldown >=1)
+            if (Input.GetKey(KeyCode.LeftShift) && _boostCooldown > 0)
             {
                 StopCoroutine(ChargeBoost());
                 _speedModifier = 2f;
+                _boostCooldown = .0001f;
                 _uiManager.GetComponent<UIManager>().UpdateBoostSlider(_boostCooldown);
                 _boostActive = true;
             }
